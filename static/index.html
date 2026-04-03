@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinNavigator</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f5f0e8; color: #2c2c2c; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { color: #c47a5e; margin-bottom: 20px; }
+        .status { background: #e8e0d5; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .btn { background: #c47a5e; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+        .btn:hover { background: #a55e42; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FinNavigator</h1>
+        <div class="status">
+            <p>Server is running!</p>
+            <p>Your AI assistant for personal finance.</p>
+        </div>
+        <button class="btn" onclick="checkHealth()">Check Server</button>
+        <p id="result" style="margin-top: 20px;"></p>
+    </div>
+    <script>
+        async function checkHealth() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                document.getElementById('result').innerHTML = 'Server response: ' + JSON.stringify(data);
+            } catch(e) {
+                document.getElementById('result').innerHTML = 'Error: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>
